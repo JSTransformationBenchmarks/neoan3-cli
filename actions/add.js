@@ -1,6 +1,6 @@
 const fs_writeFilePromise = require('util').promisify(require('fs').writeFile);
 
-const child_process_undefinedPromise = require('util').promisify(require('child_process').undefined);
+const child_process_execPromise = require('util').promisify(require('child_process').exec);
 
 const fs = require('fs');
 
@@ -145,7 +145,7 @@ let Add = {
     console.log('NOTE: I am trying to run composer synchronously.' + 'If this fails, please run "composer update"');
 
     if (!process.env.MOCKCP && !force) {
-      await child_process_undefinedPromise('composer update ', (error, stdout, stderr) => {
+      await child_process_execPromise('composer update ', (error, stdout, stderr) => {
         if (error) {
           console.log('Failed to run composer. Please do so manually.');
         }

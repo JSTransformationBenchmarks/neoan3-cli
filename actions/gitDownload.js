@@ -24,7 +24,7 @@ async function deleteFolderRecursive(folder) {
 
       if ((await fs_lstatPromise(curPath)).isDirectory()) {
         // recurse
-        deleteFolderRecursive(curPath);
+        await deleteFolderRecursive(curPath);
       } else {
         // delete file
         await fs_unlinkPromise(curPath);
@@ -45,9 +45,9 @@ async function download(urlOrObj, dest) {
     dld.on('end', async res => {
       fs.copy(tmp, dest, {
         mkdir: true
-      }, function (err) {
+      }, async function (err) {
         if (err) throw new Error(err);
-        deleteFolderRecursive(tmp);
+        await deleteFolderRecursive(tmp);
         resolve(dld);
       });
     });

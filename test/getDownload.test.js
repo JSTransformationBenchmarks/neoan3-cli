@@ -14,8 +14,8 @@ describe('Download', function () {
   before(async function () {
     await fs_mkdirPromise('./demo');
   });
-  after(function () {
-    download.deleteRecursive('./demo');
+  after(async function () {
+    await download.deleteRecursive('./demo');
   });
   describe('#download - download by url', function () {
     it('should download a complete repo', async function () {
@@ -27,7 +27,7 @@ describe('Download', function () {
   });
   describe('#download - download by object', function () {
     it('should download a complete repo', async function () {
-      download.deleteRecursive('./demo');
+      await download.deleteRecursive('./demo');
       let dl = await download.download({
         user: 'sroehrl',
         repo: 'neoan3',
